@@ -1,0 +1,49 @@
+{
+  "data": [
+    {
+      "local": "America de Cali",
+      "visitante": "Envigado FC",
+      "fecha": "2018-02-25T17:48:21.099Z",
+      "anotacioneslocal": 0,
+      "anotacionesvisitante": 0,
+      "jugadordestacado": "Sin jugador destacado",
+      "lugar": "Estadio Olímpico Pascual Guerrero, CALI"
+    },
+    {
+      "local": "Oncecaldas FC",
+      "visitante": "Deportivo Pasto",
+      "fecha": "2018-02-26T15:30:21.950Z",
+      "anotacioneslocal": 3,
+      "anotacionesvisitante": 0,
+      "jugadordestacado": "Jeison Montoya",
+      "lugar": "Estadio Palogrande, Manizales"
+    },
+    {
+      "local": "Independiente Medellin",
+      "visitante": "Deportivo Cali",
+      "fecha": "2018-02-25T19:30:21.950Z",
+      "anotacioneslocal": 2,
+      "anotacionesvisitante": 3,
+      "jugadordestacado": "Pepe Sand",
+      "lugar": "Estadio Atanasio Girardot, Medellin"
+    },
+    {
+      "local": "Independiente Santefe",
+      "visitante": "Atletico Nacional",
+      "fecha": "2018-02-27T18:30:21.950Z",
+      "anotacioneslocal": 1,
+      "anotacionesvisitante": 1,
+      "jugadordestacado": "Franco Armani",
+      "lugar": "Estadio Nemesio Camacho El Campín, Bogota"
+    },
+    {
+      "local": "Junior",
+      "visitante": "Millonarios",
+      "fecha": "2018-02-27T20:30:21.950Z",
+      "anotacioneslocal": 3,
+      "anotacionesvisitante": 1,
+      "jugadordestacado": "Teofilo Gutierrez",
+      "lugar": "Estadio Metropolitano Roberto Meléndez, Barranquilla"
+    }
+  ]
+}

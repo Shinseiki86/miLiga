@@ -1,0 +1,22 @@
+.juego-header-aling .mat-expansion-panel-header-title,
+.juego-header-aling .mat-expansion-panel-header-description{
+  flex-basis: 0;
+}
+
+.juego-header-aling .mat-expansion-panel-header-description{
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box {
+  float: left;
+}
+
+.form-juego {
+  min-width: 150px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}

@@ -1,0 +1,70 @@
+<div *ngIf="showSpinner" style=" text-align: center">
+    <mat-progress-spinner mode='indeterminate'></mat-progress-spinner>
+    <b>Por favor espere.</b><br>
+    Cargando...
+</div>
+<div *ngIf="!showSpinner">
+    <p>
+        Equipo: {{nombre | uppercase}}
+        <br>
+        <code> Aficionados: {{aficionados | number}} </code>
+        <br>
+        <code> Efectividad: {{efectividad | percent}} </code>
+    </p>
+    <mat-divider></mat-divider>
+    <p> Presupuesto: {{presupuesto | currency }}</p>
+    <mat-divider></mat-divider>
+    <h2>Jugadores</h2>
+
+    <mat-grid-list cols="4" rowHeight="70">
+        <mat-grid-tile rowspan="1">
+            <p>
+                <code> Ultima Actualización: {{actualizacion | date:'mediumDate'}} </code>
+                <br>
+                <code> Ultima Hora: {{actualizacion | date:'mediumTime'}} </code>
+            </p>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3">
+            <mat-form-field class="search-input">
+                <input matInput type="search" [(ngModel)]="searchText" />
+                <mat-placeholder [ngStyle]="{ 'color':'#c2185b' }">Buscar Jugador...</mat-placeholder>
+                <button mat-button matPrefix mat-icon-button >
+                    <mat-icon>search</mat-icon>
+                </button>
+            </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="4" rowHeight="400" style="padding: 10px" *ngIf="jugadores.length > 0 else noData">
+        <mat-grid-tile rowspan="4">
+            <mat-accordion class="jugadores-header-aling"  >
+                <mat-expansion-panel hideToggle="true" *ngFor="let j of jugadores | filter:searchText; let i=index;" [expanded]="step===i">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{j.nombre}}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            {{j.posicion}}
+                            <mat-icon>account_circle</mat-icon>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <p>Edad: {{j.edad}}</p>
+                    <p>Apodo: {{j.apodo}}</p>
+                    <p *ngIf="j.estado">Estado: Activo</p>
+                    <p *ngIf="!j.estado">Estado: Inactivo</p>
+                    <button *ngIf="!j.estado" mat-raised-button color="primary" (click)="activarJugador(j)">Activar</button>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-grid-tile>
+        <mat-grid-tile *ngFor="let j of jugadores | filter:searchText; let i=index;">
+            <app-jugador [ngClass] = "{'jugadorInactivo': !j.estado ,'jugadorActivo':j.estado}"  [jugador]="j" [equipo]="nombre" (onActivate)="actualizarEstado(j,i,$event)" (click)="mostrarDatos(i)"></app-jugador>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+
+<ng-template #noData >
+    <div class="mat-elevation-z8 noData">
+        <h1>No hay Resgistros Disponibles</h1>
+    </div>
+</ng-template>

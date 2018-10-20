@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pruebas": {
+    "miLiga": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pruebas",
+            "outputPath": "dist/miLiga",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pruebas:build"
+            "browserTarget": "miLiga:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "pruebas:build:production"
+              "browserTarget": "miLiga:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pruebas:build"
+            "browserTarget": "miLiga:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "pruebas-e2e": {
+    "miLiga-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "pruebas:serve"
+            "devServerTarget": "miLiga:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "pruebas:serve:production"
+              "devServerTarget": "miLiga:serve:production"
             }
           }
         },
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "pruebas"
+  "defaultProject": "miLiga"
 }
