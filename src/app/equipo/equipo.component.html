@@ -57,14 +57,15 @@
                 </mat-expansion-panel>
             </mat-accordion>
         </mat-grid-tile>
+        
         <mat-grid-tile *ngFor="let j of jugadores | filter:searchText; let i=index;">
             <app-jugador [ngClass] = "{'jugadorInactivo': !j.estado ,'jugadorActivo':j.estado}"  [jugador]="j" [equipo]="nombre" (onActivate)="actualizarEstado(j,i,$event)" (click)="mostrarDatos(i)"></app-jugador>
         </mat-grid-tile>
     </mat-grid-list>
-</div>
 
-<ng-template #noData >
-    <div class="mat-elevation-z8 noData">
-        <h1>No hay Resgistros Disponibles</h1>
-    </div>
-</ng-template>
+    <ng-template #noData >
+        <div class="mat-elevation-z8 noData">
+            <h1>No hay Resgistros Disponibles</h1>
+        </div>
+    </ng-template>
+</div>

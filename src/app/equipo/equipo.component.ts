@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Jugador} from './../interfaces/jugador.interface';
 //import * as JUGADORES from '../../assets/data/jugadores.json';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {JugadoresServices} from '../services/jugadores.services';
+import {JsonServices} from '../services/json.services';
 
 
 @Component({
@@ -13,10 +11,8 @@ import {JugadoresServices} from '../services/jugadores.services';
 })
 export class EquipoComponent implements OnInit {
     nombre = 'Felinos FC';
-    estatus = false;
     jugadores: Jugador[];
-    jugadoresBuscador: Jugador[];
-    step = 0;
+    //jugadoresBuscador: Jugador[];
 
     presupuesto = 18000000;
     actualizacion = new Date();
@@ -32,11 +28,12 @@ export class EquipoComponent implements OnInit {
         estado: false
     };
 
+    step = 0;
     searchText: string;
     estadoSpinner = 'indeterminate';
     showSpinner = true;
 
-    constructor(private http: HttpClient, private jugadoresService: JugadoresServices) {
+    constructor(private jsonService: JsonServices) {
     }
 
     ngOnInit() {
@@ -45,7 +42,7 @@ export class EquipoComponent implements OnInit {
         this.agregarJugador();
 
 
-        this.jugadoresService.getJugadores()
+        this.jsonService.getJson('https://api-mi-liga.now.sh/api/jugadores')
             .subscribe((data: any) =>  {
                 this.jugadores = data;
                 this.showSpinner = false;
@@ -71,7 +68,4 @@ export class EquipoComponent implements OnInit {
         this.step = index;
     }
 
-    getJugadores() {
-        return this.http.get('');
-    }
 }

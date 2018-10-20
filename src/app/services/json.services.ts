@@ -4,14 +4,12 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
     providedIn: 'root',
 })
-export class JugadoresServices {
+export class JsonServices {
 
     constructor(private http: HttpClient) { }
 
-    url = 'https://api-mi-liga.now.sh/api/jugadores';
-
-    getJugadores() {
-        return this.http.get(this.url);
+    getJson(url:string) {
+        return this.http.get(url);
     }
 
 }

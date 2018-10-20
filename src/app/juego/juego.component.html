@@ -1,54 +1,81 @@
-<div>
-    <h2>Registro de Juegos</h2>
-    <mat-card>
-        <form class="form-juego"  [formGroup]="juegoForm" (ngSubmit)="registrarJuego()">
-            <mat-form-field class="full-width">
-                <input matInput formControlName="f_local" placeholder="Equipo Local" name="local" required>
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <input matInput placeholder="Equipo Visitante" formControlName="f_visitante"  name="visitante" required>
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <input type="number" matInput placeholder="Goles Equipo Local" formControlName="f_anotacioneslocal" name="anotacioneslocal" required>
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <input type="number" matInput placeholder="Goles Equipo Visitante" formControlName="f_anotacionesvisitante" name="anotacionesvisitante" required >
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <input matInput placeholder="Lugar" formControlName="f_lugar" name="lugar" required>
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <input matInput placeholder="Jugador Destacado" formControlName="f_jugadordestacado" name="jugadordestacado" required>
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <input type="date" matInput placeholder="Fecha" formControlName="f_fecha" name="fecha" required>
-            </mat-form-field>
-
-            <button mat-raised-button color="primary" type="submit" [disabled]="juegoForm.invalid" >Registrar Juego</button>
-        </form>
-    </mat-card>
+<div *ngIf="showSpinner" style=" text-align: center">
+    <mat-progress-spinner mode='indeterminate'></mat-progress-spinner>
+    <b>Por favor espere.</b><br>
+    Cargando...
 </div>
+<div *ngIf="!showSpinner">
 
-<mat-divider></mat-divider>
-
-<h2>Resultados Anteriores</h2>
-<div *ngFor="let juego of juegos" style="margin-top: 5px;">
-<mat-accordion class="juego-header-aling" >
-    <mat-expansion-panel hideToggle="true">
+    <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
-                {{juego.local}} VS {{juego.visitante}}
+                <h2>Registro de Juegos</h2>
             </mat-panel-title>
             <mat-panel-description>
-                {{juego.lugar}}
-                <mat-icon>check_circle_outline</mat-icon>
             </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>Resultado: {{juego.anotacioneslocal}} - {{juego.anotacionesvisitante}}</p>
-        <p>Jugador Destacado : {{juego.jugadordestacado}}</p>
-        <p>Lugar: {{juego.lugar}}</p>
-        <p>Fecha: {{juego.fecha}}</p>
+            <mat-card>
+                <form class="form-juego"  [formGroup]="juegoForm" (ngSubmit)="registrarJuego()">
+                    <mat-form-field class="full-width">
+                        <input matInput formControlName="f_local" placeholder="Equipo Local" name="local" required>
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Equipo Visitante" formControlName="f_visitante"  name="visitante" required>
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input type="number" matInput placeholder="Goles Equipo Local" formControlName="f_anotacioneslocal" name="anotacioneslocal" required>
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input type="number" matInput placeholder="Goles Equipo Visitante" formControlName="f_anotacionesvisitante" name="anotacionesvisitante" required >
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Lugar" formControlName="f_lugar" name="lugar" required>
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Jugador Destacado" formControlName="f_jugadordestacado" name="jugadordestacado" required>
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input type="date" matInput placeholder="Fecha" formControlName="f_fecha" name="fecha" required>
+                    </mat-form-field>
+
+                    <button mat-raised-button color="primary" type="submit" [disabled]="juegoForm.invalid" >Registrar Juego</button>
+                </form>
+            </mat-card>
     </mat-expansion-panel>
-</mat-accordion>
-<mat-divider></mat-divider>
+
+    <mat-divider></mat-divider>
+
+    <mat-grid-list cols="4">
+
+        <mat-grid-tile colspan="1">
+            <h2>Resultados Anteriores</h2>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1">
+            <mat-form-field class="search-input">
+                <input matInput type="search" [(ngModel)]="searchText">
+                <mat-placeholder [ngStyle]="{ 'color':'#c2185b' }">Buscar Juego...</mat-placeholder>
+                <button mat-button matPrefix mat-icon-button >
+                    <mat-icon>search</mat-icon>
+                </button>
+            </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+        <mat-accordion class="juego-header-aling" >
+            <mat-expansion-panel hideToggle="true" *ngFor="let j of juegos | filter:searchText; let i=index;">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{j.local}} VS {{j.visitante}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{j.lugar}}
+                        <mat-icon>check_circle_outline</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>Resultado: {{j.anotacioneslocal}} - {{j.anotacionesvisitante}}</p>
+                <p>Jugador Destacado : {{j.jugadordestacado}}</p>
+                <p>Lugar: {{j.lugar}}</p>
+                <p>Fecha: {{j.fecha}}</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <mat-divider></mat-divider>
 </div>

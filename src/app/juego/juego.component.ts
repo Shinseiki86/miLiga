@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import * as JUEGOS from '../../assets/data/juegos.json';
 import {Juego} from '../interfaces/juego.interface';
 import {Jugador} from '../interfaces/jugador.interface';
+import {JsonServices} from '../services/json.services';
 
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,11 +17,16 @@ export class JuegoComponent implements OnInit {
     new_juego: Juego ;
     juegoForm: FormGroup;
 
-    constructor() {
+    step = 0;
+    searchText: string;
+    estadoSpinner = 'indeterminate';
+    showSpinner = true;
+
+    constructor(private jsonService: JsonServices) {
     }
 
     ngOnInit() {
-        this.juegos = (JUEGOS as any).data;
+        this.showSpinner = true;
         this.juegoForm = new FormGroup({
             f_local: new FormControl('', Validators.required),
             f_visitante: new FormControl('', Validators.required),
@@ -30,6 +36,15 @@ export class JuegoComponent implements OnInit {
             f_jugadordestacado: new FormControl('', Validators.required),
             f_lugar: new FormControl('', Validators.required)
         });
+
+        /*this.jsonService.getJson('https://api-mi-liga.now.sh/api/juegos')
+            .subscribe((data: any) =>  {
+                this.juegos = data;
+                this.showSpinner = false;
+            });*/
+        this.juegos = (JUEGOS as any).data;
+        console.log(this.juegos);
+        this.showSpinner = false;
     }
 
     registrarJuego() {
